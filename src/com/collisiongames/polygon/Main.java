@@ -35,8 +35,16 @@ public class Main {
 			if (Input.MOUSE.buttonPressed(GLFW.GLFW_MOUSE_BUTTON_1))
 				System.out.println("Button 1");
 			
-			System.out.println(Input.MOUSE.getX());
-			System.out.println(Input.MOUSE.getY());
+			if (Input.KEYBOARD.keyJustPressed(GLFW.GLFW_KEY_T))
+				System.out.println("Key T just pressed");
+			
+			if (Input.MOUSE.buttonJustPressed(GLFW.GLFW_MOUSE_BUTTON_2))
+				System.out.println("Button 2 just pressed");
+			
+//			System.out.println(Input.MOUSE.getX()); These work
+//			System.out.println(Input.MOUSE.getY());
+			
+			Input.update();
 			
 			GLFW.glfwPollEvents();
 			GLFW.glfwSwapBuffers(ID);

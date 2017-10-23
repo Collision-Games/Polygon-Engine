@@ -17,14 +17,14 @@ public class Mouse {
 	private long windowID;
 	
 	private int x, y;
-	private List<Integer> pressedButtons;
+	private Map<Integer, Integer> pressedButtons;
 	
 	/**
 	 * Default constructor
 	 */
 	public Mouse() {
 		
-		pressedButtons = new ArrayList<>();
+		pressedButtons = new HashMap<>();
 		
 		posCallback = new GLFWCursorPosCallbackI() {
 			
@@ -46,19 +46,32 @@ public class Mouse {
 					return;
 				
 				if (action == GLFW.GLFW_PRESS)
-					pressedButtons.add(button);
+					pressedButtons.put(button, 0);
 				else if (action == GLFW.GLFW_RELEASE)
 					pressedButtons.remove(button);
 			}
 		};
 	}
 	
+	public void update() {
+		
+		for (int key : pressedButtons.keySet())
+			pressedButtons.put(key, pressedButtons.get(key) + 1);
+	}
+	
+	/**
+	 * 
+	 * @param button The button's ID
+	 * @return If the button was just pressed
+	 */
+	public boolean buttonJustPressed(int button) { return pressedButtons.get(button) != null && pressedButtons.get(button) == 0; }
+	
 	/**
 	 * 
 	 * @param button The button's ID
 	 * @return If the button is being pressed
 	 */
-	public boolean buttonPressed(int button) { return pressedButtons.contains(button); }
+	public boolean buttonPressed(int button) { return pressedButtons.containsKey(button); }
 	
 	/**
 	 * 

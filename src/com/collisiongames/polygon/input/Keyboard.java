@@ -14,7 +14,7 @@ public class Keyboard {
 	private GLFWKeyCallbackI keyCallback;
 	
 	private long windowID;
-	private Map<Integer, Boolean> keys;
+	private Map<Integer, Integer> keys;
 	
 	/**
 	 * Default constructor
@@ -29,21 +29,34 @@ public class Keyboard {
 				
 				if (window != windowID)
 					return;
-				
+//				System.out.println("press");
 				if (action == GLFW.GLFW_PRESS)
-					keys.put(key, true);
+					keys.put(key, 0);
 				else if (action == GLFW.GLFW_RELEASE)
 					keys.remove(key);
 			}
 		};
 	}
 	
+	public void update() {
+		
+		for (int key : keys.keySet())
+			keys.put(key, keys.get(key) + 1);
+	}
+	
 	/**
 	 * 
-	 * @param key The keys ID
+	 * @param key The key's ID
 	 * @return If the key is being pressed
 	 */
 	public boolean keyPressed(int key) { return keys.containsKey(key); }
+	
+	/**
+	 * 
+	 * @param key The key's ID
+	 * @return If the key was just pressed
+	 */
+	public boolean keyJustPressed(int key) { return keys.get(key) != null && keys.get(key) == 0; }
 	
 	/**
 	 * 

@@ -21,6 +21,15 @@ public class Input {
 	}
 	
 	/**
+	 * Update the mouse and keyboard
+	 */
+	public static void update() {
+		
+		KEYBOARD.update();
+		MOUSE.update();
+	}
+	
+	/**
 	 * Set up keyboard and mouse
 	 */
 	static {
