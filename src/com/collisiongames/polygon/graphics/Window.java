@@ -10,17 +10,19 @@ import org.lwjgl.opengl.*;
  */
 public class Window {
 	
-	private static final int
-		WIDTH = 1280,
-		HEIGHT = 720;
-	
 	// ID of the window
 	private long ID;
+	private int width, height;
+	private String title;
 	
 	/**
 	 * Default constructor
 	 */
-	public Window() {
+	public Window(String title, int width, int height) {
+		
+		this.title = title;
+		this.width = width;
+		this.height = height;
 		
 		GLFW.glfwDefaultWindowHints();
 		
@@ -29,13 +31,13 @@ public class Window {
 		GLFW.glfwWindowHint(GLFW.GLFW_CONTEXT_VERSION_MINOR, 2);
 		GLFW.glfwWindowHint(GLFW.GLFW_OPENGL_FORWARD_COMPAT, 1);
 		
-		ID = GLFW.glfwCreateWindow(WIDTH, HEIGHT, "Game", 0, 0);
+		ID = GLFW.glfwCreateWindow(width, height, "Game", 0, 0);
 		
 		GLFW.glfwMakeContextCurrent(ID);
 		GLFW.glfwShowWindow(ID);
 		
 		GL.createCapabilities();
-		GL11.glViewport(0, 0, WIDTH, HEIGHT);
+		GL11.glViewport(0, 0, width, height);
 	}
 	
 	/**
@@ -46,6 +48,12 @@ public class Window {
 		GLFW.glfwPollEvents();
 		GLFW.glfwSwapBuffers(ID);
 	}
+	
+	public String getTitle() { return title; }
+	public void setTitle(String title) { this.title = title; GLFW.glfwSetWindowTitle(ID, title); }
+	
+	public int getWidth() { return width; }
+	public int getHeight() { return height; }
 	
 	/**
 	 * 
