@@ -4,6 +4,11 @@ import java.util.*;
 
 import org.lwjgl.glfw.*;
 
+/**
+ * 
+ * @author Alex Ringhoffer
+ *
+ */
 public class Mouse {
 	
 	private GLFWCursorPosCallbackI posCallback;
@@ -14,6 +19,9 @@ public class Mouse {
 	private int x, y;
 	private List<Integer> pressedButtons;
 	
+	/**
+	 * Default constructor
+	 */
 	public Mouse() {
 		
 		pressedButtons = new ArrayList<>();
@@ -45,10 +53,29 @@ public class Mouse {
 		};
 	}
 	
-	public boolean keyPressed(int button) { return pressedButtons.contains(button); }
+	/**
+	 * 
+	 * @param button The button's ID
+	 * @return If the button is being pressed
+	 */
+	public boolean buttonPressed(int button) { return pressedButtons.contains(button); }
+	
+	/**
+	 * 
+	 * @return The x position of the mouse
+	 */
 	public int getX() { return x; }
+	
+	/**
+	 * 
+	 * @return The y position of the mouse
+	 */
 	public int getY() { return 720 - y; }
 	
+	/**
+	 * 
+	 * @param ID The window's ID this event should be help for
+	 */
 	public void setWindow(long ID) {
 		
 		this.windowID = ID;

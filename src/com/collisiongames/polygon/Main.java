@@ -32,7 +32,7 @@ public class Main {
 			if (Input.KEYBOARD.keyPressed(GLFW.GLFW_KEY_SPACE))
 				System.out.println("Jump!");
 			
-			if (Input.MOUSE.keyPressed(GLFW.GLFW_MOUSE_BUTTON_1))
+			if (Input.MOUSE.buttonPressed(GLFW.GLFW_MOUSE_BUTTON_1))
 				System.out.println("Button 1");
 			
 			System.out.println(Input.MOUSE.getX());
