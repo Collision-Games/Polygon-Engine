@@ -265,19 +265,28 @@ public class Matrix4 {
 	 * @param angle The z angle for the rotation
 	 * @return The rotation matrix
 	 */
-	public static Matrix4 rotation(float angle) {
+	public static Matrix4 rotation(Vector3 axis, float angle) {
 		
 		Matrix4 matrix = identity();
 		
-		float radiants = (float) Math.toRadians(angle);
-		float cos = (float) Math.cos(radiants);
-		float sin = (float) Math.sin(radiants);
+		float radians = (float) Math.toRadians(angle);
+		float cos = (float) Math.cos(radians);
+		float sin = (float) Math.sin(radians);
+		float omc = 1 - cos;
 		
-		matrix.elements[0 + 0 * 4] = cos;
-		matrix.elements[1 + 0 * 4] = sin;
+		float x = axis.x, y = axis.y, z = axis.z;
+
+		matrix.elements[0] = cos + x * omc;
+		matrix.elements[1] = y * x * omc - z * sin;
+		matrix.elements[2] = x * z * omc - y * sin;
 		
-		matrix.elements[0 + 1 * 4] = -sin;
-		matrix.elements[1 + 1 * 4] = cos;
+		matrix.elements[4] = y * x * omc + z * sin;
+		matrix.elements[5] = cos + y * omc;
+		matrix.elements[6] = y + z * omc + x * sin;
+		
+		matrix.elements[8] = z * x * omc + y * sin;
+		matrix.elements[9] = z * y * omc - x * sin;
+		matrix.elements[10] = cos + z * omc;
 		
 		return matrix;
 	}
