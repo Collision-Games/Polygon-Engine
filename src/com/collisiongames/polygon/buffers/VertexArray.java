@@ -24,7 +24,7 @@ public class VertexArray extends Buffer {
      * Constructor for a instance of {@link VertexArray}
      *
      * @param vertices the vertex data of a model
-     * @param indices the element(index data) of a model
+     * @param indices  the element(index data) of a model
      */
     public VertexArray(float[] vertices, int[] indices) {
         super(glGenVertexArrays(), GL_VERTEX_ARRAY);
@@ -37,18 +37,18 @@ public class VertexArray extends Buffer {
     /**
      * Store an array of generic vertex attribute data
      *
-     * @param index specifies the index of the buffer to modified, max range is 16
-     * @param size the numbers of components per generic vertex attribute, must be 1, 2, 3 or 4
-     * @param dataType the data type of each component in the array, can be GL_BYTE, GL_SHORT, GL_INT, GL_LONG etc.
-     * @param stride the byte offset between consecutive generic vertex attributes, If stride is 0, the generic vertex attributs are understood
-     *               to be tightly packed in the array
-     * @param offset specifies the byte offset of the first component of the first generic vertex attribute in the array in the data store
+     * @param index        specifies the index of the buffer to modified, max range is 16
+     * @param size         the numbers of components per generic vertex attribute, must be 1, 2, 3 or 4
+     * @param dataType     the data type of each component in the array, can be GL_BYTE, GL_SHORT, GL_INT, GL_LONG etc.
+     * @param stride       the byte offset between consecutive generic vertex attributes, If stride is 0, the generic vertex attributs are understood
+     *                     to be tightly packed in the array
+     * @param offset       specifies the byte offset of the first component of the first generic vertex attribute in the array in the data store
      * @param bufferObject specifies the buffer to retrieve the data from
-     * @param normalized specifies if the fixed-point data should be normalized(true) when they are accessed
+     * @param normalized   specifies if the fixed-point data should be normalized(true) when they are accessed
      */
     public void assignAttribPointer(int index, int size, int dataType, int stride, int offset, BufferObject bufferObject, boolean normalized) {
         bind();
-        assert bufferObject != null;
+        assert bufferObject != null : "Buffer may not be null";
         bufferObject.bind();
         glEnableVertexAttribArray(index);
         glVertexAttribPointer(index, size, dataType, normalized, stride, offset);
@@ -57,19 +57,19 @@ public class VertexArray extends Buffer {
     /**
      * Store an array of generic vertex attribute data
      *
-     * @param index specifies the index of the buffer to modified, max range is 16
-     * @param size the numbers of components per generic vertex attribute, must be 1, 2, 3 or 4
-     * @param dataType the data type of each component in the array, can be GL_BYTE, GL_SHORT, GL_INT, GL_LONG etc.
-     * @param stride the byte offset between consecutive generic vertex attributes, If stride is 0, the generic vertex attributs are understood
-     *               to be tightly packed in the array
-     * @param offset specifies the byte offset of the first component of the first generic vertex attribute in the array in the data store
-     *               of the buffer currently bound to GL_ARRAY_BUFFER target
+     * @param index      specifies the index of the buffer to modified, max range is 16
+     * @param size       the numbers of components per generic vertex attribute, must be 1, 2, 3 or 4
+     * @param dataType   the data type of each component in the array, can be GL_BYTE, GL_SHORT, GL_INT, GL_LONG etc.
+     * @param stride     the byte offset between consecutive generic vertex attributes, If stride is 0, the generic vertex attributs are understood
+     *                   to be tightly packed in the array
+     * @param offset     specifies the byte offset of the first component of the first generic vertex attribute in the array in the data store
+     *                   of the buffer currently bound to GL_ARRAY_BUFFER target
      * @param normalized specifies if the fixed-point data should be normalized(true) when they are accessed
      */
     public void assignAttribPointer(int index, int size, int dataType, int stride, int offset, boolean normalized) {
         bind();
 
-        assert isBound(GL_ARRAY_BUFFER);
+        assert isBound(GL_ARRAY_BUFFER) : "No bound buffer";
 
         glEnableVertexAttribArray(index);
         glVertexAttribPointer(index, size, dataType, normalized, stride, offset);
@@ -78,7 +78,7 @@ public class VertexArray extends Buffer {
     /**
      * Modify the rate at which generic vertex attributes advance during instanced rendering
      *
-     * @param index specifies the index of the vertex attribute
+     * @param index   specifies the index of the vertex attribute
      * @param divisor specifies the number of instances the will pass between updates of the generic attribute at slot index
      */
     public void setAttribDivisor(int index, int divisor) {
