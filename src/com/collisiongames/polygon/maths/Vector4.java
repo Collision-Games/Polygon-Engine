@@ -5,30 +5,34 @@ package com.collisiongames.polygon.maths;
  * @author Alex Ringhoffer
  *
  */
-public class Vector2 {
-	
-	public float x, y;
+public class Vector4 {
+
+	public float x, y, z, w;
 	
 	/**
 	 * Default constructor
 	 */
-	public Vector2() { this(identity()); }
+	public Vector4() { this(identity()); }
 	
 	/**
 	 * 
 	 * @param vector The vector this vector should be set to
 	 */
-	public Vector2(Vector2 vector) { this(vector.x, vector.y); }
+	public Vector4(Vector4 vector) { this(vector.x, vector.y, vector.z, vector.w); }
 	
 	/**
 	 * 
 	 * @param x The x
 	 * @param y The y
+	 * @param z The z
+	 * @param w The w
 	 */
-	public Vector2(float x, float y) {
+	public Vector4(float x, float y, float z, float w) {
 		
 		this.x = x;
 		this.y = y;
+		this.z = z;
+		this.w = w;
 	}
 	
 	/**
@@ -36,17 +40,19 @@ public class Vector2 {
 	 * @param vector The vector this vector should be set to
 	 * @return This vector
 	 */
-	public Vector2 set(Vector2 vector) { return identity().add(vector); }
+	public Vector4 set(Vector4 vector) { return identity().add(vector); }
 	
 	/**
 	 * 
 	 * @param vector The vector that should be added
 	 * @return This vector
 	 */
-	public Vector2 add(Vector2 vector) {
+	public Vector4 add(Vector4 vector) {
 		
 		this.x += vector.x;
 		this.y += vector.y;
+		this.z += vector.z;
+		this.w += vector.w;
 		
 		return this;
 	}
@@ -56,10 +62,12 @@ public class Vector2 {
 	 * @param vector The vector that should be subtracted
 	 * @return This vector
 	 */
-	public Vector2 sub(Vector2 vector) {
+	public Vector4 sub(Vector4 vector) {
 		
 		this.x -= vector.x;
 		this.y -= vector.y;
+		this.z -= vector.z;
+		this.w -= vector.w;
 		
 		return this;
 	}
@@ -69,10 +77,12 @@ public class Vector2 {
 	 * @param vector The vector that should be multiplied
 	 * @return This vector
 	 */
-	public Vector2 mul(Vector2 vector) {
+	public Vector4 mul(Vector4 vector) {
 		
 		this.x *= vector.x;
 		this.y *= vector.y;
+		this.z *= vector.z;
+		this.w *= vector.w;
 		
 		return this;
 	}
@@ -82,26 +92,23 @@ public class Vector2 {
 	 * @param vector The vector that should be divided
 	 * @return This vector
 	 */
-	public Vector2 div(Vector2 vector) {
+	public Vector4 div(Vector4 vector) {
 		
 		this.x /= vector.x;
 		this.y /= vector.y;
+		this.z /= vector.z;
+		this.w /= vector.w;
 		
 		return this;
 	}
 	
 	/**
 	 * 
-	 * @return The magnitude of this vector
-	 */
-	public float magnitude() { return (float) Math.sqrt(x * x + y * y); }
-	
-	/**
-	 * 
 	 * @return The identity vector
 	 */
-	public static Vector2 identity() { return new Vector2(0, 0); }
+	public static Vector4 identity() { return new Vector4(0, 0, 0, 0); }
 	
-	public Vector2 clone() { return new Vector2(x, y); }
-	public String toString() { return "[" + x + " " + y + "]"; }
+	public Vector4 clone() { return new Vector4(x, y, z, w); }
+	public String toString() { return "[" + x + " " + y + " " + z + " " + w + "]"; }
+
 }

@@ -16,14 +16,15 @@ public class Vector3 {
 	
 	/**
 	 * 
-	 * @param vec The vector this vector should be set to
+	 * @param vector The vector this vector should be set to
 	 */
-	public Vector3(Vector3 vec) { this(vec.x, vec.y, vec.z); }
+	public Vector3(Vector3 vector) { this(vector.x, vector.y, vector.z); }
 	
 	/**
 	 * 
 	 * @param x The x
 	 * @param y The y
+	 * @param z The z
 	 */
 	public Vector3(float x, float y, float z) {
 		
@@ -34,7 +35,7 @@ public class Vector3 {
 	
 	/**
 	 * 
-	 * @param vec The vector this vector should be set to
+	 * @param vector The vector this vector should be set to
 	 * @return This vector
 	 */
 	public Vector3 set(Vector3 vector) { return identity().add(vector); }
@@ -94,6 +95,12 @@ public class Vector3 {
 		
 		return this;
 	}
+	
+	/**
+	 * 
+	 * @return The magnitude of this vector
+	 */
+	public float magnitude() { return (float) Math.sqrt(x * x + y * y + z * z); }
 	
 	/**
 	 * 
